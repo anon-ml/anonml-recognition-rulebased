@@ -23,7 +23,7 @@ public class RegExpController {
     private DocumentAccess documentAccess = new DocumentAccess(new RestTemplate());
 
 
-    @PostMapping("/annotate/{id}")
+    @PostMapping("/rules/annotate/{id}")
     public List<Anonymization> annotate(@PathVariable String id) {
         ResponseEntity<Document> resp = documentAccess.getDocument(id);
         Document doc = resp.getBody();
