@@ -1,20 +1,22 @@
 package ml.anon.recognition.rulebased;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import lombok.extern.java.Log;
+import ml.anon.annotation.ReplacementGenerator;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
-import ml.anon.model.anonymization.Producer;
 import ml.anon.model.docmgmt.Document;
+import ml.anon.recognition.rulebased.model.LicencePlateRule;
 import ml.anon.recognition.rulebased.model.RegExp;
 import ml.anon.recognition.rulebased.model.RegExpRepository;
+import ml.anon.recognition.rulebased.model.Rule;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by mirco on 11.06.17.
@@ -27,33 +29,24 @@ public class AnnotationService {
     @Resource
     private RegExpRepository repo;
 
+    private Multimap<Label, Rule> rules = ArrayListMultimap.create();
+
+    @PostConstruct
+    private void buildRules() {
+        List<RegExp> regExp = repo.findAll();
+        rules.put(Label.LICENCE_PLATE, new LicencePlateRule());
+        regExp.forEach(rule -> rules.put(rule.getLabel(), rule));
+
+    }
+
     public List<Anonymization> annotate(Document doc) {
         List<Anonymization> result = new ArrayList<>();
-        for (Label label : Label.getAll()) {
-            Integer order = 1;
-            while (order != null) {
-                List<RegExp> byOrder = getByOrder(label, order);
-                for (RegExp regExp : byOrder) {
-                    Pattern pattern = Pattern.compile(regExp.getRegExp());
-                    Matcher matcher = pattern.matcher(doc.fullText());
-                    log.info("Try " + regExp.getRegExp());
-                    while (matcher.find()) {
-                        result.add(Anonymization.builder().label(label).replacement("#################").producer(Producer.REGEX).original(matcher.group(0)).build());
-                    }
-
-                }
-                if (byOrder.isEmpty()) {
-                    order = null;
-                } else {
-                    order++;
-                }
-            }
-        }
+        rules.entries().forEach(a -> {
+            log.info("Applying rule " + a.getValue());
+            result.addAll(a.getValue().apply(doc, new ReplacementGenerator()));
+        });
         return result;
     }
 
-    private List<RegExp> getByOrder(Label label, int order) {
 
-        return repo.findByLabel(label).stream().filter(a -> a.getOrder() == order).collect(Collectors.toList());
-    }
 }

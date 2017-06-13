@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.coreRegExp;
+package ml.anon.recognition.rulebased.initalization;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -16,7 +16,7 @@ class CoreRegExp {
 
 
     public CoreRegExp() {
-        addLicencePlate();
+
         addBirthDates();
         addPhoneNumbers();
         addUrls();
@@ -44,7 +44,5 @@ class CoreRegExp {
         map.put(Label.BIRTHDATE, RegExp.builder().core(true).label(Label.BIRTHDATE).order(1).regExp("\\b\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}\\b").build());
     }
 
-    private void addLicencePlate() {
-        map.put(Label.LICENCE_PLATE, RegExp.builder().core(true).label(Label.LICENCE_PLATE).order(1).regExp("\\b([A-Z]{1,3} [A-Z]{1,4} \\d{1,4})\\b").build());
-    }
+
 }

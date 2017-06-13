@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.coreRegExp;
+package ml.anon.recognition.rulebased.initalization;
 
 import lombok.extern.java.Log;
 import ml.anon.recognition.rulebased.model.RegExpRepository;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  */
 @Component
 @Log
-public class CreateCoreRegExp implements CommandLineRunner {
+class CreateCoreRegExp implements CommandLineRunner {
 
     @Resource
     private RegExpRepository repo;
