@@ -44,10 +44,12 @@ public class RegExpRule extends AbstractRule implements Comparable<RegExpRule> {
     public List<Anonymization> apply(ml.anon.model.docmgmt.Document doc, ReplacementGenerator repl) {
         Matcher matcher = Pattern.compile(regExp).matcher(doc.fullText());
         List<Anonymization> results = new ArrayList<>();
-        while (matcher.find()) {
+        int matches = matcher.groupCount();
+        int last = 0;
+        while (matcher.find() && last <= matches) {
             results.add(Anonymization.builder().label(getLabel()).replacement(repl.generateReplacement(matcher.group(0), getLabel()))
                     .producer(Producer.RULE)
-                    .original(matcher.group(0)).build());
+                    .original(matcher.group(last++)).build());
         }
         return results;
     }

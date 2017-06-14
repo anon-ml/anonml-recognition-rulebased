@@ -43,7 +43,9 @@ public class AnnotationService {
         List<Anonymization> result = new ArrayList<>();
         rules.entries().forEach(a -> {
             log.info("Applying rule " + a.getValue());
-            result.addAll(a.getValue().apply(doc, new ReplacementGenerator()));
+            List<Anonymization> apply = a.getValue().apply(doc, new ReplacementGenerator());
+            log.info("Found " + apply.size());
+            result.addAll(apply);
         });
         return result;
     }

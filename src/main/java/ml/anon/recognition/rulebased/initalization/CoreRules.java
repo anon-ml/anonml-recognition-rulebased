@@ -49,7 +49,7 @@ class CoreRules {
     }
 
     private void addBirthDates() {
-        map.put(Label.BIRTHDATE, RegExpRule.builder().core(true).label(Label.BIRTHDATE).regExp("\\b\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}\\b").build());
+        map.put(Label.BIRTHDATE, RegExpRule.builder().core(true).label(Label.BIRTHDATE).regExp("\\b\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}\\[,\\.]?b").build());
     }
 
 
