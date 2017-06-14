@@ -55,7 +55,7 @@ public class RegExRuleOverview extends VerticalLayout implements View {
         grid.addColumn(r -> BooleanUtils.toString(r.isActive(), "T", "F")).setCaption("Aktiv");
         Grid.Column<RegExpRule, String> name = grid.addColumn(RegExpRule::getName).setCaption("Name");
         Grid.Column<RegExpRule, Label> label = grid.addColumn(RegExpRule::getLabel).setCaption("Label");
-        Grid.Column<RegExpRule, Double> weight = grid.addColumn(RegExpRule::getOrder).setCaption("Gewicht");
+        Grid.Column<RegExpRule, Double> weight = grid.addColumn(RegExpRule::getWeight).setCaption("Gewicht");
         Grid.Column<RegExpRule, String> regEx = grid.addColumn(r -> StringUtils.abbreviate(StringUtils.defaultString(r.getRegExp()), 50)).setCaption("RegEx");
         name.setExpandRatio(1);
         label.setExpandRatio(1);

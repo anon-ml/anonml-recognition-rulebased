@@ -9,14 +9,12 @@ import ml.anon.model.anonymization.Label;
 import ml.anon.model.docmgmt.Document;
 import ml.anon.recognition.rulebased.api.model.AbstractRule;
 import ml.anon.recognition.rulebased.api.model.LicencePlateRule;
-import ml.anon.recognition.rulebased.api.model.Rule;
 import ml.anon.recognition.rulebased.api.repository.RuleRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by mirco on 11.06.17.
@@ -29,7 +27,7 @@ public class AnnotationService {
     @Resource
     private RuleRepository repo;
 
-    private Multimap<Label, Rule> rules = ArrayListMultimap.create();
+    private Multimap<Label, AbstractRule> rules = ArrayListMultimap.create();
 
     @PostConstruct
     private void buildRules() {
@@ -40,14 +38,25 @@ public class AnnotationService {
     }
 
     public List<Anonymization> annotate(Document doc) {
-        List<Anonymization> result = new ArrayList<>();
-        rules.entries().forEach(a -> {
-            log.info("Applying rule " + a.getValue());
-            List<Anonymization> apply = a.getValue().apply(doc, new ReplacementGenerator());
-            log.info("Found " + apply.size());
-            result.addAll(apply);
-        });
-        return result;
+
+        List<Anonymization> results = new ArrayList<>();
+        for (Map.Entry<Label, Collection<AbstractRule>> entry : rules.asMap().entrySet()) {
+            Multimap<Double, AbstractRule> weights = ArrayListMultimap.create();
+            SortedSet<Double> keys = new TreeSet<>();
+
+            entry.getValue().forEach(r -> {
+                keys.add(r.getWeight());
+                weights.put(r.getWeight(), r);
+            });
+
+            for (Double key : keys) {
+                if (results.isEmpty()) {
+                    weights.get(key).forEach(r -> results.addAll(r.apply(doc, new ReplacementGenerator())));
+                }
+            }
+        }
+
+        return results;
     }
 
 

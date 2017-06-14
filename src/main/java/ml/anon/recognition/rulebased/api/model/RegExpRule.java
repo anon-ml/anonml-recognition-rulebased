@@ -6,10 +6,8 @@ import ml.anon.annotation.ReplacementGenerator;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
 import ml.anon.model.anonymization.Producer;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
@@ -20,13 +18,13 @@ import java.util.regex.Pattern;
  */
 @Data
 
-public class RegExpRule extends AbstractRule implements Comparable<RegExpRule> {
+public class RegExpRule extends AbstractRule {
 
     private String regExp;
 
     @Builder
-    private RegExpRule(String id, boolean core, boolean active, boolean editable, double order, String name, Label label, List<Predicate<?>> additionalConstraints, String regExp) {
-        super(id, core, active, editable, order, name, label, additionalConstraints);
+    private RegExpRule(String id, boolean core, boolean active, boolean editable, double weight, String name, Label label, List<Predicate<?>> additionalConstraints, String regExp) {
+        super(id, core, active, editable, weight, name, label, additionalConstraints);
         this.regExp = regExp;
     }
 
@@ -34,11 +32,6 @@ public class RegExpRule extends AbstractRule implements Comparable<RegExpRule> {
         super(null, true, true, true, 0d, null, null, null);
     }
 
-
-    @Override
-    public int compareTo(@NotNull RegExpRule o) {
-        return Comparator.comparing(RegExpRule::getLabel).thenComparing(RegExpRule::getOrder).compare(this, o);
-    }
 
     @Override
     public List<Anonymization> apply(ml.anon.model.docmgmt.Document doc, ReplacementGenerator repl) {
