@@ -8,6 +8,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import lombok.extern.slf4j.Slf4j;
 import ml.anon.recognition.rulebased.api.repository.RuleRepository;
+import ml.anon.recognition.rulebased.ui.overview.AllRulesOverview;
+import ml.anon.recognition.rulebased.ui.regex.RegExRuleOverview;
 
 import javax.annotation.Resource;
 

@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.ui;
+package ml.anon.recognition.rulebased.ui.regex;
 
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;

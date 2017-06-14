@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.ui;
+package ml.anon.recognition.rulebased.ui.regex;
 
 import com.vaadin.data.provider.AbstractBackEndDataProvider;
 import com.vaadin.data.provider.Query;
@@ -11,6 +11,7 @@ import com.vaadin.ui.VerticalLayout;
 import ml.anon.model.anonymization.Label;
 import ml.anon.recognition.rulebased.api.model.RegExpRule;
 import ml.anon.recognition.rulebased.api.repository.RuleRepository;
+import ml.anon.recognition.rulebased.ui.Menu;
 import org.apache.commons.lang.BooleanUtils;
 import org.codehaus.plexus.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,13 @@ public class RegExRuleOverview extends VerticalLayout implements View {
 
     @Autowired
     public RegExRuleOverview(RuleRepository repo) {
-        this.repo = repo;
-    }
 
-    @PostConstruct
-    public void init() {
+        this.repo = repo;
         setSizeFull();
         RuleEditor editor = new RuleEditor(repo, grid);
         VerticalLayout mainLayout = new VerticalLayout(grid, editor);
+        mainLayout.setMargin(false);
+
         addComponent(new Menu());
         addComponent(mainLayout);
 
@@ -52,7 +52,7 @@ public class RegExRuleOverview extends VerticalLayout implements View {
 
         grid.setDataProvider(new RegExProvider());
 
-        grid.addColumn(r -> BooleanUtils.toString(r.isActive(), "x", "")).setCaption("Aktiv");
+        grid.addColumn(r -> BooleanUtils.toString(r.isActive(), "T", "F")).setCaption("Aktiv");
         Grid.Column<RegExpRule, String> name = grid.addColumn(RegExpRule::getName).setCaption("Name");
         Grid.Column<RegExpRule, Label> label = grid.addColumn(RegExpRule::getLabel).setCaption("Label");
         Grid.Column<RegExpRule, Double> weight = grid.addColumn(RegExpRule::getOrder).setCaption("Gewicht");
@@ -62,10 +62,14 @@ public class RegExRuleOverview extends VerticalLayout implements View {
         regEx.setExpandRatio(1);
 
         grid.setCaption("RegEx Regeln");
-        grid.sort(label);
 
         grid.setSizeFull();
         editor.setWidth(100, Unit.PERCENTAGE);
+    }
+
+    @PostConstruct
+    public void init() {
+
     }
 
 

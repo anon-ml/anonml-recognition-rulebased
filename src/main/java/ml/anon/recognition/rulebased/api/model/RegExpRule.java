@@ -54,4 +54,8 @@ public class RegExpRule extends AbstractRule implements Comparable<RegExpRule> {
         return results;
     }
 
+    @Override
+    public boolean isEditable() {
+        return true;
+    }
 }
