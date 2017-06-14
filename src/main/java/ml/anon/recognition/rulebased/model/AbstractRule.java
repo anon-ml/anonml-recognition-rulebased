@@ -1,24 +1,31 @@
 package ml.anon.recognition.rulebased.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import ml.anon.model.anonymization.Label;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+import java.util.function.Predicate;
+
 /**
  * Created by mirco on 13.06.17.
  */
+@Data
+@Document(collection = "Rule")
+@AllArgsConstructor
 public abstract class AbstractRule implements Rule {
+    @Id
+    private String id;
+    private boolean core;
+    private boolean active = true;
+    private boolean editable = false;
+    private int order = 0;
+    private String name;
+    private Label label;
 
-    private boolean active;
+    private List<Predicate<?>> additionalConstraints;
 
-    @Override
-    public boolean isActive() {
-        return active;
-    }
 
-    @Override
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    @Override
-    public boolean isEditable() {
-        return false;
-    }
 }

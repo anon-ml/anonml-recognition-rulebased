@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Created by mirco on 11.06.17.
  */
-public interface RegExpRepository extends MongoRepository<RegExp, String> {
+public interface RuleRepository extends MongoRepository<AbstractRule, String> {
 
-    List<RegExp> findByCore(boolean core);
+    List<RegExpRule> findByCore(boolean core);
 
-    List<RegExp> findByLabel(Label label);
+    List<RegExpRule> findByLabel(Label label);
 }

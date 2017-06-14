@@ -1,7 +1,7 @@
 package ml.anon.recognition.rulebased.initalization;
 
 import lombok.extern.java.Log;
-import ml.anon.recognition.rulebased.model.RegExpRepository;
+import ml.anon.recognition.rulebased.model.RuleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +15,13 @@ import javax.annotation.Resource;
 class CreateCoreRegExp implements CommandLineRunner {
 
     @Resource
-    private RegExpRepository repo;
+    private RuleRepository repo;
 
     @Override
     public void run(String... args) throws Exception {
         if (repo.findByCore(true).isEmpty()) {
-            log.info("Can not find core RegExp; adding ...");
-            new CoreRegExp().getMap().entries().forEach(a -> repo.save(a.getValue()));
+            log.info("Can not find core RegExpRule; adding ...");
+            new CoreRules().getMap().entries().forEach(a -> repo.save(a.getValue()));
         }
     }
 }
