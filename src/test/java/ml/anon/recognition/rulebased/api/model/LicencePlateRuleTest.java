@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.model;
+package ml.anon.recognition.rulebased.api.model;
 
 import ml.anon.annotation.ReplacementGenerator;
 import ml.anon.model.anonymization.Anonymization;

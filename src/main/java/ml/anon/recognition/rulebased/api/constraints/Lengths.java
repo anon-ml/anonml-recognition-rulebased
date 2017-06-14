@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.constraints;
+package ml.anon.recognition.rulebased.api.constraints;
 
 import lombok.AllArgsConstructor;
 
@@ -24,6 +24,12 @@ public class Lengths {
 
         private int length;
         private boolean minLength;
+
+        @Override
+        public String toString() {
+            String str = "length: " + length;
+            return minLength ? "min. " + str : "max. " + str;
+        }
 
         @Override
         public boolean test(String s) {

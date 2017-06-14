@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.model;
+package ml.anon.recognition.rulebased.api.model;
 
 import lombok.Builder;
 import lombok.Data;
@@ -25,13 +25,13 @@ public class RegExpRule extends AbstractRule implements Comparable<RegExpRule> {
     private String regExp;
 
     @Builder
-    private RegExpRule(String id, boolean core, boolean active, boolean editable, int order, String name, Label label, List<Predicate<?>> additionalConstraints, String regExp) {
+    private RegExpRule(String id, boolean core, boolean active, boolean editable, double order, String name, Label label, List<Predicate<?>> additionalConstraints, String regExp) {
         super(id, core, active, editable, order, name, label, additionalConstraints);
         this.regExp = regExp;
     }
 
     public RegExpRule() {
-        super(null, true, true, true, 0, null, null, null);
+        super(null, true, true, true, 0d, null, null, null);
     }
 
 
@@ -54,8 +54,4 @@ public class RegExpRule extends AbstractRule implements Comparable<RegExpRule> {
         return results;
     }
 
-    @Override
-    public boolean isEditable() {
-        return true;
-    }
 }

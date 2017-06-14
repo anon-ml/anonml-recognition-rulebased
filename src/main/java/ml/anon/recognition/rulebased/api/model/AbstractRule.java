@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.model;
+package ml.anon.recognition.rulebased.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +21,7 @@ public abstract class AbstractRule implements Rule {
     private boolean core;
     private boolean active = true;
     private boolean editable = false;
-    private int order = 0;
+    private double order;
     private String name;
     private Label label;
 

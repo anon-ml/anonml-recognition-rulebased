@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased;
+package ml.anon.recognition.rulebased.api;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -7,10 +7,10 @@ import ml.anon.annotation.ReplacementGenerator;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
 import ml.anon.model.docmgmt.Document;
-import ml.anon.recognition.rulebased.model.AbstractRule;
-import ml.anon.recognition.rulebased.model.LicencePlateRule;
-import ml.anon.recognition.rulebased.model.Rule;
-import ml.anon.recognition.rulebased.model.RuleRepository;
+import ml.anon.recognition.rulebased.api.model.AbstractRule;
+import ml.anon.recognition.rulebased.api.model.LicencePlateRule;
+import ml.anon.recognition.rulebased.api.model.Rule;
+import ml.anon.recognition.rulebased.api.model.RuleRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

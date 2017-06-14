@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased.model;
+package ml.anon.recognition.rulebased.api.model;
 
 import com.google.common.collect.Lists;
 import ml.anon.annotation.ReplacementGenerator;

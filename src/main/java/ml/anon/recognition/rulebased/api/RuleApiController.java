@@ -1,4 +1,4 @@
-package ml.anon.recognition.rulebased;
+package ml.anon.recognition.rulebased.api;
 
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.docmgmt.Document;
@@ -15,15 +15,15 @@ import java.util.List;
 /**
  * Created by mirco on 11.06.17.
  */
-@RestController
-public class RegExpController {
+@RestController("/rules")
+public class RuleApiController {
 
     @Resource
     private AnnotationService annotationService;
     private DocumentAccess documentAccess = new DocumentAccess(new RestTemplate());
 
 
-    @PostMapping("/rules/annotate/{id}")
+    @PostMapping("/annotate/{id}")
     public List<Anonymization> annotate(@PathVariable String id) {
         ResponseEntity<Document> resp = documentAccess.getDocument(id);
         Document doc = resp.getBody();

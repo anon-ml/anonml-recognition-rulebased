@@ -1,13 +1,13 @@
-package ml.anon.recognition.rulebased.initalization;
+package ml.anon.recognition.rulebased.api.initalization;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
 import ml.anon.model.anonymization.Label;
-import ml.anon.recognition.rulebased.model.AbstractRule;
-import ml.anon.recognition.rulebased.model.IBANRule;
-import ml.anon.recognition.rulebased.model.LicencePlateRule;
-import ml.anon.recognition.rulebased.model.RegExpRule;
+import ml.anon.recognition.rulebased.api.model.AbstractRule;
+import ml.anon.recognition.rulebased.api.model.IBANRule;
+import ml.anon.recognition.rulebased.api.model.LicencePlateRule;
+import ml.anon.recognition.rulebased.api.model.RegExpRule;
 
 /**
  * Created by mirco on 11.06.17.
