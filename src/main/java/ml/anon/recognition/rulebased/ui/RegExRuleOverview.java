@@ -1,48 +1,46 @@
 package ml.anon.recognition.rulebased.ui;
 
-import com.vaadin.annotations.Theme;
 import com.vaadin.data.provider.AbstractBackEndDataProvider;
 import com.vaadin.data.provider.Query;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import lombok.extern.slf4j.Slf4j;
 import ml.anon.model.anonymization.Label;
 import ml.anon.recognition.rulebased.api.model.RegExpRule;
 import ml.anon.recognition.rulebased.api.repository.RuleRepository;
 import org.apache.commons.lang.BooleanUtils;
 import org.codehaus.plexus.util.StringUtils;
-import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
+import javax.annotation.PostConstruct;
 import java.util.stream.Stream;
 
 /**
  * Created by mirco on 14.06.17.
  */
-@SpringUI(path = "/admin")
-@Theme("valo")
-@Slf4j
-public class MainUI extends UI {
+@SpringComponent
+@UIScope
+public class RegExRuleOverview extends VerticalLayout implements View {
 
-    @Resource
+
     private RuleRepository repo;
-
-    @Resource
-    private MongoOperations ops;
-
-
     private Grid<RegExpRule> grid = new Grid<>();
 
+    @Autowired
+    public RegExRuleOverview(RuleRepository repo) {
+        this.repo = repo;
+    }
 
-    @Override
-    protected void init(VaadinRequest request) {
+    @PostConstruct
+    public void init() {
+        setSizeFull();
         RuleEditor editor = new RuleEditor(repo, grid);
         VerticalLayout mainLayout = new VerticalLayout(grid, editor);
-
-        setContent(mainLayout);
+        addComponent(new Menu());
+        addComponent(mainLayout);
 
         grid.asSingleSelect().addValueChangeListener(e -> {
             if (e.getValue() != null) {
@@ -68,9 +66,13 @@ public class MainUI extends UI {
 
         grid.setSizeFull();
         editor.setWidth(100, Unit.PERCENTAGE);
-
     }
 
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+        System.out.print(viewChangeEvent);
+    }
 
     private class RegExProvider extends AbstractBackEndDataProvider<RegExpRule, Void> {
 
@@ -84,6 +86,5 @@ public class MainUI extends UI {
             return repo.findAllEditable().size();
         }
     }
-
 
 }

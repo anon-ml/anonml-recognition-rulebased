@@ -44,8 +44,10 @@ public class RuleEditor extends VerticalLayout {
     public RuleEditor(RuleRepository repo, Grid<RegExpRule> grid) {
         this.grid = grid;
         HorizontalLayout top = new HorizontalLayout();
+        HorizontalLayout buttons = new HorizontalLayout();
+        buttons.addComponents(save, delete);
         top.addComponents(name, order, active);
-        addComponents(top, regExp, save, delete);
+        addComponents(top, regExp, buttons);
         regExp.setSizeFull();
         active.setSizeUndefined();
         name.setSizeFull();
@@ -69,7 +71,6 @@ public class RuleEditor extends VerticalLayout {
         });
         delete.addClickListener(e -> {
             repo.delete(rule);
-
             onChange(repo, grid);
         });
 
@@ -78,10 +79,7 @@ public class RuleEditor extends VerticalLayout {
     }
 
     private void onChange(RuleRepository repo, Grid<RegExpRule> grid) {
-        log.info("onChange");
         grid.getDataProvider().refreshAll();
-
-
         rule = new RegExpRule();
         binder.setBean(rule);
 
