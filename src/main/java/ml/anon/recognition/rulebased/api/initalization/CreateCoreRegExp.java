@@ -1,7 +1,7 @@
 package ml.anon.recognition.rulebased.api.initalization;
 
 import lombok.extern.java.Log;
-import ml.anon.recognition.rulebased.api.model.RuleRepository;
+import ml.anon.recognition.rulebased.api.repository.RuleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

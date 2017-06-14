@@ -10,7 +10,7 @@ import ml.anon.model.docmgmt.Document;
 import ml.anon.recognition.rulebased.api.model.AbstractRule;
 import ml.anon.recognition.rulebased.api.model.LicencePlateRule;
 import ml.anon.recognition.rulebased.api.model.Rule;
-import ml.anon.recognition.rulebased.api.model.RuleRepository;
+import ml.anon.recognition.rulebased.api.repository.RuleRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
