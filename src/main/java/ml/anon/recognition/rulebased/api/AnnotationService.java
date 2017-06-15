@@ -42,6 +42,7 @@ public class AnnotationService {
         refreshRules();
         List<Anonymization> results = new ArrayList<>();
         for (Map.Entry<Label, Collection<AbstractRule>> entry : rules.asMap().entrySet()) {
+            List<Anonymization> ruleResults = new ArrayList<>();
             Multimap<Double, AbstractRule> weights = ArrayListMultimap.create();
             SortedSet<Double> keys = new TreeSet<>();
 
@@ -51,10 +52,15 @@ public class AnnotationService {
             });
 
             for (Double key : keys) {
-                if (results.isEmpty()) {
-                    weights.get(key).forEach(r -> results.addAll(r.apply(doc, new ReplacementGenerator())));
+                if (ruleResults.isEmpty()) {
+                    weights.get(key).forEach(r -> {
+                        List<Anonymization> apply = r.apply(doc, new ReplacementGenerator());
+                        log.info("Rule " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
+                        ruleResults.addAll(apply);
+                    });
                 }
             }
+            results.addAll(ruleResults);
         }
 
         return results;

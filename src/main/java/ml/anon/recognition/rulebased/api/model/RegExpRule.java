@@ -37,12 +37,12 @@ public class RegExpRule extends AbstractRule {
     public List<Anonymization> apply(ml.anon.model.docmgmt.Document doc, ReplacementGenerator repl) {
         Matcher matcher = Pattern.compile(regExp).matcher(doc.fullText());
         List<Anonymization> results = new ArrayList<>();
-        int matches = matcher.groupCount();
-        int last = 0;
-        while (matcher.find() && last <= matches) {
+
+
+        while (matcher.find()) {
             results.add(Anonymization.builder().label(getLabel()).replacement(repl.generateReplacement(matcher.group(0), getLabel()))
                     .producer(Producer.RULE)
-                    .original(matcher.group(last++)).build());
+                    .original(matcher.group(0)).build());
         }
         return results;
     }
