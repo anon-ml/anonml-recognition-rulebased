@@ -31,6 +31,8 @@ public class RuleEditor extends VerticalLayout {
 
     private CheckBox active = new CheckBox(("Aktiv"));
 
+    private ComboBox<ml.anon.model.anonymization.Label> label = new ComboBox<>("Label");
+
     private Button save = new Button("Speichern", FontAwesome.SAVE);
 
     private Button delete = new Button("Löschen", FontAwesome.REMOVE);
@@ -46,18 +48,21 @@ public class RuleEditor extends VerticalLayout {
         HorizontalLayout top = new HorizontalLayout();
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.addComponents(save, delete);
-        top.addComponents(name, order, active);
+        top.addComponents(name, order, label, active);
         addComponents(top, regExp, buttons);
         regExp.setSizeFull();
         active.setSizeUndefined();
         name.setSizeFull();
         order.setSizeUndefined();
+        label.setItems(ml.anon.model.anonymization.Label.values());
         top.setSizeFull();
 
         top.setComponentAlignment(active, Alignment.MIDDLE_CENTER);
         binder.forField(active).bind("active");
         binder.forField(regExp).bind("regExp");
         binder.forField(name).bind("name");
+
+        label.addValueChangeListener(l -> rule.setLabel(l.getValue()));
         binder.forField(order).withConverter(NumberField.getConverter("...")).bind("weight");
         binder.setBean(rule);
         setSpacing(true);
@@ -88,6 +93,7 @@ public class RuleEditor extends VerticalLayout {
     public final void changeBoundRule(RegExpRule r) {
         rule = r;
         binder.setBean(rule);
+        label.setSelectedItem(r.getLabel());
         save.focus();
         name.selectAll();
     }
