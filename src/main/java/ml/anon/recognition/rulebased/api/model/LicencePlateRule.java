@@ -22,7 +22,7 @@ public class LicencePlateRule extends AbstractRule {
             "\\b[A-Z]{1,3} [A-Z]{1,4} [1-9]\\d{0,3}\\.?\\b").build();
 
     @Builder
-    private LicencePlateRule(String id, boolean core, boolean active, boolean editable, double order, String name, Label label, List<Predicate<?>> additionalConstraints, RegExpRule wrapped) {
+    private LicencePlateRule(String id, boolean core, boolean active, boolean editable, double order, String name, Label label, List<Predicate<String>> additionalConstraints, RegExpRule wrapped) {
         super(id, core, active, editable, order, name, label, additionalConstraints);
         this.wrapped = wrapped;
     }
@@ -34,15 +34,8 @@ public class LicencePlateRule extends AbstractRule {
 
     @Override
     public List<Anonymization> apply(Document doc, ReplacementGenerator repl) {
-
         List<Anonymization> regExp = wrapped.apply(doc, repl);
-        regExp.forEach(w -> {
-            if (w.getOriginal().endsWith(".")) {
-                System.err.println(w.getOriginal());
-                w.setOriginal(w.getOriginal().replace(".", ""));
-            }
-        });
-        return regExp;
+        return applyConstrains(regExp);
     }
 
 

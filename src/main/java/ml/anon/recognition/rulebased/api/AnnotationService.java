@@ -12,7 +12,6 @@ import ml.anon.recognition.rulebased.api.model.LicencePlateRule;
 import ml.anon.recognition.rulebased.api.repository.RuleRepository;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.*;
 
@@ -29,8 +28,10 @@ public class AnnotationService {
 
     private Multimap<Label, AbstractRule> rules = ArrayListMultimap.create();
 
-    @PostConstruct
-    private void buildRules() {
+
+    private void refreshRules() {
+        log.info("refreshing rules");
+        rules.clear();
         List<AbstractRule> regExpRule = repo.findAll();
         rules.put(Label.LICENCE_PLATE, new LicencePlateRule());
         regExpRule.forEach(rule -> rules.put(rule.getLabel(), rule));
@@ -38,7 +39,7 @@ public class AnnotationService {
     }
 
     public List<Anonymization> annotate(Document doc) {
-
+        refreshRules();
         List<Anonymization> results = new ArrayList<>();
         for (Map.Entry<Label, Collection<AbstractRule>> entry : rules.asMap().entrySet()) {
             Multimap<Double, AbstractRule> weights = ArrayListMultimap.create();

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by mirco on 11.06.17.
  */
-@RestController("/rules")
+@RestController
 public class RuleApiController {
 
     @Resource
@@ -23,7 +23,7 @@ public class RuleApiController {
     private DocumentAccess documentAccess = new DocumentAccess(new RestTemplate());
 
 
-    @PostMapping("/annotate/{id}")
+    @PostMapping("/rules/annotate/{id}")
     public List<Anonymization> annotate(@PathVariable String id) {
         ResponseEntity<Document> resp = documentAccess.getDocument(id);
         Document doc = resp.getBody();

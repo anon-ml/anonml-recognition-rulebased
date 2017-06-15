@@ -24,7 +24,6 @@ class CoreRules {
         addPhoneNumbers();
         addUrls();
 
-
         map.put(Label.IBAN, new IBANRule());
         map.put(Label.LICENCE_PLATE, new LicencePlateRule());
 

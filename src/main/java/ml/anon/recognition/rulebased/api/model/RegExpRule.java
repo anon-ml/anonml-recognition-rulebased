@@ -23,7 +23,7 @@ public class RegExpRule extends AbstractRule {
     private String regExp;
 
     @Builder
-    private RegExpRule(String id, boolean core, boolean active, boolean editable, double weight, String name, Label label, List<Predicate<?>> additionalConstraints, String regExp) {
+    private RegExpRule(String id, boolean core, boolean active, boolean editable, double weight, String name, Label label, List<Predicate<String>> additionalConstraints, String regExp) {
         super(id, core, active, editable, weight, name, label, additionalConstraints);
         this.regExp = regExp;
     }

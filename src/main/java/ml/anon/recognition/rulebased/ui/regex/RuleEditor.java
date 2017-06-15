@@ -58,7 +58,7 @@ public class RuleEditor extends VerticalLayout {
         binder.forField(active).bind("active");
         binder.forField(regExp).bind("regExp");
         binder.forField(name).bind("name");
-        binder.forField(order).withConverter(NumberField.getConverter("...")).bind("order");
+        binder.forField(order).withConverter(NumberField.getConverter("...")).bind("weight");
         binder.setBean(rule);
         setSpacing(true);
         actions.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
