@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 public class IBANRule extends AbstractRule {
 
 
-    private Rule iban = RegExpRule.builder().regExp("[A-Z]{2}\\s?\\d{2}\\s?([0-9a-zA-Z]{4}\\s?){1,8}([A-Z0-9]{2})?[\\.,\\s]{0,1}").label(getLabel()).build();
+    private Rule iban = RegExpRule.builder().regExp("[A-Z]{2}\\s?\\d{2}\\s?([0-9a-zA-Z]{4}\\s?){2,8}([A-Z0-9]{2})?[\\.,\\s]{0,1}").label(getLabel()).build();
 
     @Builder
     private IBANRule(String id, boolean core, boolean active, boolean editable, double order, String name, Label label, List<Predicate<String>> additionalConstraints, Rule iban) {
@@ -27,7 +27,7 @@ public class IBANRule extends AbstractRule {
     }
 
     public IBANRule() {
-        super(null, true, true, false, 0, "IBAN", Label.IBAN, Lists.newArrayList(Lengths.minLength(4), Lengths.maxLength(40)));
+        super(null, true, true, false, 0, "IBAN", Label.IBAN, Lists.newArrayList(Lengths.minLength(10), Lengths.maxLength(36)));
     }
 
     @Override

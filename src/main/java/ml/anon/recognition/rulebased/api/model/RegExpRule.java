@@ -35,7 +35,7 @@ public class RegExpRule extends AbstractRule {
 
     @Override
     public List<Anonymization> apply(ml.anon.model.docmgmt.Document doc, ReplacementGenerator repl) {
-        Matcher matcher = Pattern.compile(regExp).matcher(doc.fullText());
+        Matcher matcher = Pattern.compile(regExp).matcher(doc.getFullText());
         List<Anonymization> results = new ArrayList<>();
 
 
