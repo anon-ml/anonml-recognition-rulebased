@@ -13,7 +13,7 @@ import ml.anon.recognition.rulebased.api.model.RegExpRule;
 import ml.anon.recognition.rulebased.api.repository.RuleRepository;
 import ml.anon.recognition.rulebased.ui.Menu;
 import org.apache.commons.lang.BooleanUtils;
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;

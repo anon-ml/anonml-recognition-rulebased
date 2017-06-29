@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -40,7 +39,7 @@ public abstract class AbstractRule implements Rule, Comparable<AbstractRule> {
     }
 
     @Override
-    public int compareTo(@NotNull AbstractRule o) {
+    public int compareTo(AbstractRule o) {
         return Double.compare(weight, o.weight);
     }
 }

@@ -54,9 +54,11 @@ public class AnnotationService {
             for (Double key : keys) {
                 if (ruleResults.isEmpty()) {
                     weights.get(key).forEach(r -> {
-                        List<Anonymization> apply = r.apply(doc, new ReplacementGenerator());
-                        log.info("Rule " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
-                        ruleResults.addAll(apply);
+                        if (r.isActive()) {
+                            List<Anonymization> apply = r.apply(doc, new ReplacementGenerator());
+                            log.info("Rule " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
+                            ruleResults.addAll(apply);
+                        }
                     });
                 }
             }

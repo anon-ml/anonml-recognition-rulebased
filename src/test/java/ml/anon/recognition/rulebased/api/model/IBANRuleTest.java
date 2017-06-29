@@ -5,6 +5,7 @@ import ml.anon.annotation.ReplacementGenerator;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.docmgmt.Document;
 import ml.anon.model.docmgmt.FileType;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import static org.hamcrest.core.Is.is;
 /**
  * Created by mirco on 13.06.17.
  */
+@Ignore
 public class IBANRuleTest {
 
     public Document iban = Document.builder().text(

@@ -4,6 +4,7 @@ import ml.anon.annotation.ReplacementGenerator;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.docmgmt.Document;
 import ml.anon.model.docmgmt.FileType;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -15,6 +16,7 @@ import static org.hamcrest.Matchers.is;
 /**
  * Created by mirco on 13.06.17.
  */
+@Ignore
 public class LicencePlateRuleTest {
 
     public Document text = Document.builder().text(Collections.singletonList(
