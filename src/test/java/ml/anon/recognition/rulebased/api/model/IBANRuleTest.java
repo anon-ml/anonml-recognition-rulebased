@@ -1,7 +1,7 @@
 package ml.anon.recognition.rulebased.api.model;
 
 import com.google.common.collect.Lists;
-import ml.anon.annotation.ReplacementGenerator;
+import ml.anon.annotation.ReplacementAccess;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.docmgmt.Document;
 import ml.anon.model.docmgmt.FileType;
@@ -27,7 +27,7 @@ public class IBANRuleTest {
 
     @Test
     public void apply() throws Exception {
-        List<Anonymization> apply = ibanRule.apply(iban, new ReplacementGenerator());
+        List<Anonymization> apply = ibanRule.apply(iban, new ReplacementAccess());
         assertThat(apply.size(), is(1));
         assertThat(apply.get(0), is("AD1400080001001234567890"));
 

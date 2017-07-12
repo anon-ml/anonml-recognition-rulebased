@@ -3,7 +3,7 @@ package ml.anon.recognition.rulebased.api;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import lombok.extern.java.Log;
-import ml.anon.annotation.ReplacementGenerator;
+import ml.anon.annotation.ReplacementAccess;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
 import ml.anon.model.docmgmt.Document;
@@ -38,7 +38,7 @@ public class AnnotationService {
 
     }
 
-    public List<Anonymization> annotate(Document doc) {
+    public List<Anonymization> annotate(Document doc) throws Exception {
         refreshRules();
         List<Anonymization> results = new ArrayList<>();
         for (Map.Entry<Label, Collection<AbstractRule>> entry : rules.asMap().entrySet()) {
@@ -53,13 +53,13 @@ public class AnnotationService {
 
             for (Double key : keys) {
                 if (ruleResults.isEmpty()) {
-                    weights.get(key).forEach(r -> {
+                    for (AbstractRule r : weights.get(key)) {
                         if (r.isActive()) {
-                            List<Anonymization> apply = r.apply(doc, new ReplacementGenerator());
+                            List<Anonymization> apply = r.apply(doc, new ReplacementAccess());
                             log.info("Rule " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
                             ruleResults.addAll(apply);
                         }
-                    });
+                    }
                 }
             }
             results.addAll(ruleResults);

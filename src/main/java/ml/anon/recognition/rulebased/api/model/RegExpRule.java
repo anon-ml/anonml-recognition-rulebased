@@ -2,7 +2,7 @@ package ml.anon.recognition.rulebased.api.model;
 
 import lombok.Builder;
 import lombok.Data;
-import ml.anon.annotation.ReplacementGenerator;
+import ml.anon.annotation.ReplacementAccess;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
 import ml.anon.model.anonymization.Producer;
@@ -34,7 +34,7 @@ public class RegExpRule extends AbstractRule {
 
 
     @Override
-    public List<Anonymization> apply(ml.anon.model.docmgmt.Document doc, ReplacementGenerator repl) {
+    public List<Anonymization> apply(ml.anon.model.docmgmt.Document doc, ReplacementAccess repl) throws Exception {
         Matcher matcher = Pattern.compile(regExp).matcher(doc.getFullText());
         List<Anonymization> results = new ArrayList<>();
 

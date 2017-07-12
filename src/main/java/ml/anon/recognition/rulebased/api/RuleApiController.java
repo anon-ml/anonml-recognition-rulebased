@@ -24,7 +24,7 @@ public class RuleApiController {
 
 
     @PostMapping("/rules/annotate/{id}")
-    public List<Anonymization> annotate(@PathVariable String id) {
+    public List<Anonymization> annotate(@PathVariable String id) throws Exception {
         ResponseEntity<Document> resp = documentAccess.getDocument(id);
         Document doc = resp.getBody();
 
