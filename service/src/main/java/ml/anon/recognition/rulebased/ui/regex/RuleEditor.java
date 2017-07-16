@@ -6,6 +6,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import lombok.extern.slf4j.Slf4j;
+import ml.anon.anonymization.model.Label;
 import ml.anon.recognition.rulebased.api.model.RegExpRule;
 import ml.anon.recognition.rulebased.repository.RuleRepository;
 import org.springframework.context.annotation.Scope;
@@ -31,7 +32,7 @@ public class RuleEditor extends VerticalLayout {
 
     private CheckBox active = new CheckBox(("Aktiv"));
 
-    private ComboBox<ml.anon.model.anonymization.Label> label = new ComboBox<>("Label");
+    private ComboBox<ml.anon.anonymization.model.Label> label = new ComboBox<>("Label");
 
     private Button save = new Button("Speichern", FontAwesome.SAVE);
 
@@ -54,7 +55,7 @@ public class RuleEditor extends VerticalLayout {
         active.setSizeUndefined();
         name.setSizeFull();
         order.setSizeUndefined();
-        label.setItems(ml.anon.model.anonymization.Label.values());
+        label.setItems(Label.values());
         top.setSizeFull();
 
         top.setComponentAlignment(active, Alignment.MIDDLE_CENTER);

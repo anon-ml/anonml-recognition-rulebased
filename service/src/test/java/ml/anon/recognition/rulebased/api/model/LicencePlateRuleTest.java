@@ -1,7 +1,7 @@
 package ml.anon.recognition.rulebased.api.model;
 
-import ml.anon.annotation.ReplacementAccess;
-import ml.anon.model.anonymization.Anonymization;
+import ml.anon.documentmanagement.resource.ReplacementResource;
+import ml.anon.anonymization.model.Anonymization;
 import ml.anon.documentmanagement.model.Document;
 import ml.anon.documentmanagement.model.FileType;
 import org.junit.Ignore;
@@ -23,7 +23,7 @@ public class LicencePlateRuleTest {
             "Das ist ein String mit Nummernschildern: HH AA 123 oder AA BB 2. Das hier ist kein valides Nummernschild: AAA BBBB 12. Das auch nicht: HH AA 012")).
             originalFileType(FileType.PDF).build();
     public Rule lpRule = new LicencePlateRule();
-    public ReplacementAccess gen = new ReplacementAccess();
+    public ReplacementResource gen = new ReplacementResource();
 
     @Test
     public void shouldFindValidLicencePlate() throws Exception {

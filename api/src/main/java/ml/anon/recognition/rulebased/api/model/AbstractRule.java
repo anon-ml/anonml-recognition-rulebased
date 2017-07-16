@@ -2,8 +2,8 @@ package ml.anon.recognition.rulebased.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ml.anon.model.anonymization.Anonymization;
-import ml.anon.model.anonymization.Label;
+import ml.anon.anonymization.model.Anonymization;
+import ml.anon.anonymization.model.Label;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

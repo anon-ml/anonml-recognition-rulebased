@@ -3,9 +3,9 @@ package ml.anon.recognition.rulebased.service;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import lombok.extern.java.Log;
-import ml.anon.annotation.ReplacementAccess;
-import ml.anon.model.anonymization.Anonymization;
-import ml.anon.model.anonymization.Label;
+import ml.anon.documentmanagement.resource.ReplacementResource;
+import ml.anon.anonymization.model.Anonymization;
+import ml.anon.anonymization.model.Label;
 import ml.anon.documentmanagement.model.Document;
 import ml.anon.recognition.rulebased.api.model.AbstractRule;
 import ml.anon.recognition.rulebased.api.model.LicencePlateRule;
@@ -55,7 +55,7 @@ public class AnnotationService {
         if (ruleResults.isEmpty()) {
           for (AbstractRule r : weights.get(key)) {
             if (r.isActive()) {
-              List<Anonymization> apply = r.apply(doc, new ReplacementAccess());
+              List<Anonymization> apply = r.apply(doc, new ReplacementResource());
               log.info("Rule " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
               ruleResults.addAll(apply);
             }

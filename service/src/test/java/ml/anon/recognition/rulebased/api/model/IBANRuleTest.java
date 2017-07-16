@@ -1,8 +1,8 @@
 package ml.anon.recognition.rulebased.api.model;
 
 import com.google.common.collect.Lists;
-import ml.anon.annotation.ReplacementAccess;
-import ml.anon.model.anonymization.Anonymization;
+import ml.anon.documentmanagement.resource.ReplacementResource;
+import ml.anon.anonymization.model.Anonymization;
 import ml.anon.documentmanagement.model.Document;
 import ml.anon.documentmanagement.model.FileType;
 import org.junit.Ignore;
@@ -27,7 +27,7 @@ public class IBANRuleTest {
 
     @Test
     public void apply() throws Exception {
-        List<Anonymization> apply = ibanRule.apply(iban, new ReplacementAccess());
+        List<Anonymization> apply = ibanRule.apply(iban, new ReplacementResource());
         assertThat(apply.size(), is(1));
         assertThat(apply.get(0), is("AD1400080001001234567890"));
 

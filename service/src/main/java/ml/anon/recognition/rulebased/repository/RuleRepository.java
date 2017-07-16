@@ -1,6 +1,6 @@
 package ml.anon.recognition.rulebased.repository;
 
-import ml.anon.model.anonymization.Label;
+import ml.anon.anonymization.model.Label;
 import ml.anon.recognition.rulebased.api.model.AbstractRule;
 import ml.anon.recognition.rulebased.api.model.RegExpRule;
 import org.springframework.data.mongodb.repository.MongoRepository;

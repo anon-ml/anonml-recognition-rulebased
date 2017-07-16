@@ -1,7 +1,7 @@
 package ml.anon.recognition.rulebased.api.model;
 
-import ml.anon.annotation.ReplacementAccess;
-import ml.anon.model.anonymization.Anonymization;
+import ml.anon.documentmanagement.resource.ReplacementResource;
+import ml.anon.anonymization.model.Anonymization;
 import ml.anon.documentmanagement.model.Document;
 
 import java.util.List;
@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface Rule {
 
-    List<Anonymization> apply(Document doc, ReplacementAccess repl) throws Exception;
+    List<Anonymization> apply(Document doc, ReplacementResource repl) throws Exception;
 
 }

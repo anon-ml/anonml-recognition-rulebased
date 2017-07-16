@@ -1,6 +1,6 @@
 package ml.anon.recognition.rulebased.controller;
 
-import ml.anon.model.anonymization.Anonymization;
+import ml.anon.anonymization.model.Anonymization;
 import ml.anon.documentmanagement.model.Document;
 import ml.anon.documentmanagement.resource.DocumentResource;
 import ml.anon.recognition.rulebased.service.AnnotationService;

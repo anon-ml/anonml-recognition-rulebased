@@ -2,11 +2,11 @@ package ml.anon.recognition.rulebased.api.model;
 
 import lombok.Builder;
 import lombok.Data;
-import ml.anon.annotation.ReplacementAccess;
+import ml.anon.documentmanagement.resource.ReplacementResource;
 import ml.anon.documentmanagement.model.Document;
-import ml.anon.model.anonymization.Anonymization;
-import ml.anon.model.anonymization.Label;
-import ml.anon.model.anonymization.Producer;
+import ml.anon.anonymization.model.Anonymization;
+import ml.anon.anonymization.model.Label;
+import ml.anon.anonymization.model.Producer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class RegExpRule extends AbstractRule {
 
 
     @Override
-    public List<Anonymization> apply(Document doc, ReplacementAccess repl) throws Exception {
+    public List<Anonymization> apply(Document doc, ReplacementResource repl) throws Exception {
         Matcher matcher = Pattern.compile(regExp).matcher(doc.getFullText());
         List<Anonymization> results = new ArrayList<>();
 

@@ -2,9 +2,9 @@ package ml.anon.recognition.rulebased.api.model;
 
 import com.google.common.collect.Lists;
 import lombok.Builder;
-import ml.anon.annotation.ReplacementAccess;
-import ml.anon.model.anonymization.Anonymization;
-import ml.anon.model.anonymization.Label;
+import ml.anon.documentmanagement.resource.ReplacementResource;
+import ml.anon.anonymization.model.Anonymization;
+import ml.anon.anonymization.model.Label;
 import ml.anon.documentmanagement.model.Document;
 import ml.anon.recognition.rulebased.api.constraints.Lengths;
 
@@ -31,7 +31,7 @@ public class IBANRule extends AbstractRule {
     }
 
     @Override
-    public List<Anonymization> apply(Document doc, ReplacementAccess repl) throws Exception {
+    public List<Anonymization> apply(Document doc, ReplacementResource repl) throws Exception {
         List<Anonymization> apply = iban.apply(doc, repl);
         return applyConstrains(apply);
 
