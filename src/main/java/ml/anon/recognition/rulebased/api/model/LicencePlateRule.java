@@ -5,7 +5,7 @@ import lombok.Builder;
 import ml.anon.annotation.ReplacementAccess;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
-import ml.anon.model.docmgmt.Document;
+import ml.anon.documentmanagement.model.Document;
 import ml.anon.recognition.rulebased.api.constraints.Lengths;
 
 import java.util.List;

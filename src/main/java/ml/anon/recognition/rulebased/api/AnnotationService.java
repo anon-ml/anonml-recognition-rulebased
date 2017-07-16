@@ -6,7 +6,7 @@ import lombok.extern.java.Log;
 import ml.anon.annotation.ReplacementAccess;
 import ml.anon.model.anonymization.Anonymization;
 import ml.anon.model.anonymization.Label;
-import ml.anon.model.docmgmt.Document;
+import ml.anon.documentmanagement.model.Document;
 import ml.anon.recognition.rulebased.api.model.AbstractRule;
 import ml.anon.recognition.rulebased.api.model.LicencePlateRule;
 import ml.anon.recognition.rulebased.api.repository.RuleRepository;

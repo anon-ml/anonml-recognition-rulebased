@@ -1,8 +1,8 @@
 package ml.anon.recognition.rulebased.api;
 
 import ml.anon.model.anonymization.Anonymization;
-import ml.anon.model.docmgmt.Document;
-import ml.anon.model.docmgmt.DocumentAccess;
+import ml.anon.documentmanagement.model.Document;
+import ml.anon.documentmanagement.resource.DocumentResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,12 +20,12 @@ public class RuleApiController {
 
     @Resource
     private AnnotationService annotationService;
-    private DocumentAccess documentAccess = new DocumentAccess(new RestTemplate());
+    private DocumentResource documentResource = new DocumentResource(new RestTemplate());
 
 
     @PostMapping("/rules/annotate/{id}")
     public List<Anonymization> annotate(@PathVariable String id) throws Exception {
-        ResponseEntity<Document> resp = documentAccess.getDocument(id);
+        ResponseEntity<Document> resp = documentResource.getDocument(id);
         Document doc = resp.getBody();
 
         return annotationService.annotate(doc);

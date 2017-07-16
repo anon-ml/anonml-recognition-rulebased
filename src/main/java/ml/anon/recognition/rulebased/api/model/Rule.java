@@ -2,7 +2,7 @@ package ml.anon.recognition.rulebased.api.model;
 
 import ml.anon.annotation.ReplacementAccess;
 import ml.anon.model.anonymization.Anonymization;
-import ml.anon.model.docmgmt.Document;
+import ml.anon.documentmanagement.model.Document;
 
 import java.util.List;
 

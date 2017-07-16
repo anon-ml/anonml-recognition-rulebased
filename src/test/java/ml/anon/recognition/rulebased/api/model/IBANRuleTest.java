@@ -3,8 +3,8 @@ package ml.anon.recognition.rulebased.api.model;
 import com.google.common.collect.Lists;
 import ml.anon.annotation.ReplacementAccess;
 import ml.anon.model.anonymization.Anonymization;
-import ml.anon.model.docmgmt.Document;
-import ml.anon.model.docmgmt.FileType;
+import ml.anon.documentmanagement.model.Document;
+import ml.anon.documentmanagement.model.FileType;
 import org.junit.Ignore;
 import org.junit.Test;
 
