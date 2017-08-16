@@ -51,7 +51,7 @@
       <artifactId>document-management-api</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -131,6 +131,11 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+
+        <configuration>
+          <mainClass>ml.anon.recognition.rulebased.AppRulebased</mainClass>
+
+        </configuration>
       </plugin>
     </plugins>
   </build>

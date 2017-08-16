@@ -14,13 +14,13 @@
 
 
   <dependencies>
+
+
     <dependency>
       <groupId>ml.anon</groupId>
       <artifactId>recognition-rulebased-api</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-
-
   </dependencies>
 
 </project>
