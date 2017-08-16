@@ -10,6 +10,7 @@ import ml.anon.resource.Delete;
 import ml.anon.resource.Read;
 import ml.anon.resource.Update;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -30,7 +31,7 @@ public class RuleResource implements Create<RuleImpl>, Read<RuleImpl>, Update<Ru
 
   @Override
   public RuleImpl findById(String id) {
-    log.trace("Find Rule with id {}", id);
+    log.debug("Find Rule with id {}", id);
     ResponseEntity<RuleImpl> response = restTemplate
         .getForEntity(baseUrl + "/{id}", RuleImpl.class, id);
     return response.getBody();
@@ -38,7 +39,7 @@ public class RuleResource implements Create<RuleImpl>, Read<RuleImpl>, Update<Ru
 
   @Override
   public List<RuleImpl> findAll() {
-    log.trace("Find all rules");
+    log.debug("Find all rules");
     ResponseEntity<List<RuleImpl>> result = restTemplate
         .exchange(baseUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<RuleImpl>>() {
         });
@@ -46,20 +47,26 @@ public class RuleResource implements Create<RuleImpl>, Read<RuleImpl>, Update<Ru
   }
 
   @Override
-  public RuleImpl update(RuleImpl instance) {
-    log.trace("Update rule {}", instance);
-    return null;
+  public RuleImpl update(String id, RuleImpl instance) {
+    log.debug("Update rule {}", instance);
+    ResponseEntity<RuleImpl> exchange = restTemplate
+        .exchange(baseUrl + "/{id}", HttpMethod.PUT, new HttpEntity<>(instance), RuleImpl.class,
+            id);
+    return exchange.getBody();
   }
 
   @Override
   public RuleImpl create(RuleImpl instance) {
-
-    log.trace("Create rule {}", instance);
-    return null;
+    log.debug("Create rule {}", instance);
+    ResponseEntity<RuleImpl> exchange = restTemplate
+        .exchange(baseUrl + "", HttpMethod.POST, new HttpEntity<>(instance), RuleImpl.class
+        );
+    return exchange.getBody();
   }
 
   @Override
   public void delete(String id) {
-    log.trace("Delete rule with id {}", id);
+    log.debug("Delete rule with id {}", id);
+    restTemplate.delete(baseUrl + "/{id}", id);
   }
 }
