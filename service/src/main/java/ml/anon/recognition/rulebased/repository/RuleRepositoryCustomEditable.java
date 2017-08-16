@@ -1,13 +1,13 @@
 package ml.anon.recognition.rulebased.repository;
 
-import ml.anon.recognition.rulebased.api.model.RegExpRule;
 
 import java.util.List;
+import ml.anon.recognition.rulebased.api.model.RuleImpl;
 
 /**
  * Created by mirco on 14.06.17.
  */
 public interface RuleRepositoryCustomEditable {
 
-    List<RegExpRule> findAllEditable();
+  List<RuleImpl> findAllEditable();
 }

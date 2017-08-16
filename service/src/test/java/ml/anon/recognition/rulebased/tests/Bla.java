@@ -1,7 +1,8 @@
 package ml.anon.recognition.rulebased.tests;
 
-import ml.anon.recognition.rulebased.api.model.RegExpRule;
+
 import ml.anon.recognition.rulebased.api.model.Rule;
+import ml.anon.recognition.rulebased.api.model.RuleImpl;
 import org.junit.Test;
 
 /**
@@ -11,7 +12,7 @@ public class Bla {
 
   @Test
   public void test() {
-    Rule rule = new RegExpRule();
+    Rule rule = RuleImpl.builder().build();
   }
 
 }
