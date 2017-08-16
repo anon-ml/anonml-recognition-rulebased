@@ -14,14 +14,14 @@ import javax.annotation.Resource;
 @Log
 class CreateCoreRegExp implements CommandLineRunner {
 
-    @Resource
-    private RuleRepository repo;
+  @Resource
+  private RuleRepository repo;
 
-    @Override
-    public void run(String... args) throws Exception {
-        if (repo.findByCore(true).isEmpty()) {
-            log.info("Can not find core RegExpRule; adding ...");
-            new CoreRules().getMap().entries().forEach(a -> repo.save(a.getValue()));
-        }
+  @Override
+  public void run(String... args) throws Exception {
+    if (repo.findByCore(true).isEmpty()) {
+      log.info("Can not find core RegExpRule; adding ...");
+      new CoreRules().getMap().entries().forEach(a -> repo.save(a.getValue()));
     }
+  }
 }

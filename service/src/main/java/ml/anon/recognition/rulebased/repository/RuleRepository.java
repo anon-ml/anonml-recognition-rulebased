@@ -1,8 +1,7 @@
 package ml.anon.recognition.rulebased.repository;
 
 import ml.anon.anonymization.model.Label;
-import ml.anon.recognition.rulebased.api.model.AbstractRule;
-import ml.anon.recognition.rulebased.api.model.RegExpRule;
+import ml.anon.recognition.rulebased.api.model.RuleImpl;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +11,10 @@ import java.util.List;
  * Created by mirco on 11.06.17.
  */
 @Repository
-public interface RuleRepository extends MongoRepository<AbstractRule, String>, RuleRepositoryCustomEditable {
+public interface RuleRepository extends MongoRepository<RuleImpl, String>,
+    RuleRepositoryCustomEditable {
 
-    List<RegExpRule> findByCore(boolean core);
+  List<RuleImpl> findByCore(boolean core);
 
-    List<RegExpRule> findByLabel(Label label);
+  List<RuleImpl> findByLabel(Label label);
 }

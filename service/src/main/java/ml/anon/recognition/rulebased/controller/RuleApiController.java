@@ -1,35 +1,37 @@
 package ml.anon.recognition.rulebased.controller;
 
-import ml.anon.anonymization.model.Anonymization;
-import ml.anon.documentmanagement.model.Document;
-import ml.anon.documentmanagement.resource.DocumentResource;
-import ml.anon.recognition.rulebased.service.AnnotationService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.ws.rs.GET;
+import ml.anon.recognition.rulebased.api.model.Rule;
+import ml.anon.recognition.rulebased.api.model.RuleImpl;
+import ml.anon.recognition.rulebased.repository.RuleRepository;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by mirco on 11.06.17.
+ * Created by mirco on 16.08.17.
  */
 @RestController
+
 public class RuleApiController {
 
-    @Resource
-    private AnnotationService annotationService;
-    private DocumentResource documentResource = new DocumentResource(new RestTemplate());
+  @Resource
+  private RuleRepository ruleRepository;
 
+  @GetMapping(path = "/api/rule/{id}")
+  public RuleImpl getById(@RequestParam String id) {
+    return ruleRepository.findOne(id);
+  }
 
-    @PostMapping("/rules/annotate/{id}")
-    public List<Anonymization> annotate(@PathVariable String id) throws Exception {
-        ResponseEntity<Document> resp = documentResource.getDocument(id);
-        Document doc = resp.getBody();
+  @GetMapping(path = "/api/rule")
+  public List<RuleImpl> getAll() {
+    return ruleRepository.findAll();
+  }
 
-        return annotationService.annotate(doc);
-    }
 
 }
