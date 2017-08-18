@@ -1,7 +1,7 @@
 package ml.anon.recognition.rulebased.repository;
 
 
-import ml.anon.recognition.rulebased.api.model.RuleImpl;
+import ml.anon.recognition.rulebased.api.model.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
@@ -17,9 +17,9 @@ public class RuleRepositoryImpl implements RuleRepositoryCustomEditable {
   public MongoOperations ops;
 
   @Override
-  public List<RuleImpl> findAllEditable() {
-    Query q = new Query().restrict(RuleImpl.class);
-    return ops.find(q, RuleImpl.class);
+  public List<Rule> findAllEditable() {
+    Query q = new Query().restrict(Rule.class);
+    return ops.find(q, Rule.class);
 
   }
 }
