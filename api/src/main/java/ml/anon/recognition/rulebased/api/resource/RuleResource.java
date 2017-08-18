@@ -1,10 +1,8 @@
 package ml.anon.recognition.rulebased.api.resource;
 
 import java.util.List;
-import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import ml.anon.recognition.rulebased.api.model.Rule;
-import ml.anon.recognition.rulebased.api.model.RuleImpl;
 import ml.anon.resource.Create;
 import ml.anon.resource.Delete;
 import ml.anon.resource.Read;
@@ -21,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Slf4j
 @Component
-public class RuleResource implements Create<RuleImpl>, Read<RuleImpl>, Update<RuleImpl>,
+public class RuleResource implements Create<Rule>, Read<Rule>, Update<Rule>,
     Delete {
 
 
@@ -30,36 +28,36 @@ public class RuleResource implements Create<RuleImpl>, Read<RuleImpl>, Update<Ru
   private String baseUrl = "http://localhost:9002" + "/api/rule";
 
   @Override
-  public RuleImpl findById(String id) {
-    log.debug("Find Rule with id {}", id);
-    ResponseEntity<RuleImpl> response = restTemplate
-        .getForEntity(baseUrl + "/{id}", RuleImpl.class, id);
+  public Rule findById(String id) {
+    log.debug("Find Applicable with id {}", id);
+    ResponseEntity<Rule> response = restTemplate
+        .getForEntity(baseUrl + "/{id}", Rule.class, id);
     return response.getBody();
   }
 
   @Override
-  public List<RuleImpl> findAll() {
+  public List<Rule> findAll() {
     log.debug("Find all rules");
-    ResponseEntity<List<RuleImpl>> result = restTemplate
-        .exchange(baseUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<RuleImpl>>() {
+    ResponseEntity<List<Rule>> result = restTemplate
+        .exchange(baseUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<Rule>>() {
         });
     return result.getBody();
   }
 
   @Override
-  public RuleImpl update(String id, RuleImpl instance) {
+  public Rule update(String id, Rule instance) {
     log.debug("Update rule {}", instance);
-    ResponseEntity<RuleImpl> exchange = restTemplate
-        .exchange(baseUrl + "/{id}", HttpMethod.PUT, new HttpEntity<>(instance), RuleImpl.class,
+    ResponseEntity<Rule> exchange = restTemplate
+        .exchange(baseUrl + "/{id}", HttpMethod.PUT, new HttpEntity<>(instance), Rule.class,
             id);
     return exchange.getBody();
   }
 
   @Override
-  public RuleImpl create(RuleImpl instance) {
+  public Rule create(Rule instance) {
     log.debug("Create rule {}", instance);
-    ResponseEntity<RuleImpl> exchange = restTemplate
-        .exchange(baseUrl + "", HttpMethod.POST, new HttpEntity<>(instance), RuleImpl.class
+    ResponseEntity<Rule> exchange = restTemplate
+        .exchange(baseUrl + "", HttpMethod.POST, new HttpEntity<>(instance), Rule.class
         );
     return exchange.getBody();
   }
