@@ -12,6 +12,7 @@ import ml.anon.anonymization.model.Anonymization;
 import ml.anon.anonymization.model.Label;
 import ml.anon.anonymization.model.Producer;
 import ml.anon.documentmanagement.model.Document;
+import ml.anon.anonymization.model.Replacement;
 import ml.anon.documentmanagement.resource.ReplacementResource;
 import ml.anon.recognition.rulebased.api.constraints.Constraint;
 import org.springframework.data.annotation.Id;
@@ -47,10 +48,10 @@ public class RuleImpl implements Rule {
     List<Anonymization> regExpResults = new ArrayList<>();
 
     while (matcher.find()) {
-      regExpResults.add(Anonymization.builder().label(label)
-          .replacement(repl.generateReplacement(matcher.group(0), label))
-          .producer(Producer.RULE)
-          .original(matcher.group(0)).build());
+      regExpResults.add(Anonymization.builder()
+          .data(
+              repl.create(Replacement.builder().label(label).original(matcher.group(0)).build()))
+          .producer(Producer.RULE).build());
     }
     return applyConstrains(regExpResults);
   }
@@ -58,7 +59,8 @@ public class RuleImpl implements Rule {
   protected List<Anonymization> applyConstrains(List<Anonymization> anonymizations) {
     if (constrains != null) {
       return anonymizations.stream()
-          .filter(s -> constrains.stream().allMatch(c -> c.test(s.getOriginal()))).collect(
+          .filter(s -> constrains.stream().allMatch(c -> c.test(s.getData().getOriginal())))
+          .collect(
               Collectors.toList());
     }
     return anonymizations;
