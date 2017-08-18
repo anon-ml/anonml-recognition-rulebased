@@ -19,17 +19,15 @@ import java.util.List;
 @RestController
 public class AnnotationController {
 
-    @Resource
-    private AnnotationService annotationService;
-    private DocumentResource documentResource = new DocumentResource(new RestTemplate());
+  @Resource
+  private AnnotationService annotationService;
+  private DocumentResource documentResource = new DocumentResource(new RestTemplate());
 
 
-    @PostMapping("/rules/annotate/{id}")
-    public List<Anonymization> annotate(@PathVariable String id) throws Exception {
-        ResponseEntity<Document> resp = documentResource.getDocument(id);
-        Document doc = resp.getBody();
-
-        return annotationService.annotate(doc);
-    }
+  @PostMapping("/rules/annotate/{id}")
+  public List<Anonymization> annotate(@PathVariable String id) throws Exception {
+    Document doc = documentResource.findById(id);
+    return annotationService.annotate(doc);
+  }
 
 }
