@@ -7,6 +7,7 @@ import ml.anon.resource.Create;
 import ml.anon.resource.Delete;
 import ml.anon.resource.Read;
 import ml.anon.resource.Update;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -24,8 +25,9 @@ public class RuleResource implements Create<Rule>, Read<Rule>, Update<Rule>,
 
 
   private RestTemplate restTemplate = new RestTemplate();
-
-  private String baseUrl = "http://localhost:9002" + "/api/rule";
+  @Value("${rulebased.service.url}")
+  private String rulebasedUrl;
+  private String baseUrl = rulebasedUrl + "/api/rule";
 
   @Override
   public Rule findById(String id) {

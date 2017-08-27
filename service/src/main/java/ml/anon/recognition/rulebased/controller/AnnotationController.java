@@ -21,8 +21,8 @@ public class AnnotationController {
 
   @Resource
   private AnnotationService annotationService;
-  private DocumentResource documentResource = new DocumentResource(new RestTemplate());
-
+  @Resource
+  private DocumentResource documentResource;
 
   @PostMapping("/rules/annotate/{id}")
   public List<Anonymization> annotate(@PathVariable String id) throws Exception {
