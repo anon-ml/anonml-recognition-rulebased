@@ -1,6 +1,7 @@
 package ml.anon.recognition.rulebased.api.resource;
 
 import java.util.List;
+import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import ml.anon.recognition.rulebased.api.model.Rule;
 import ml.anon.resource.Create;
@@ -27,7 +28,13 @@ public class RuleResource implements Create<Rule>, Read<Rule>, Update<Rule>,
   private RestTemplate restTemplate = new RestTemplate();
   @Value("${rulebased.service.url}")
   private String rulebasedUrl;
-  private String baseUrl = rulebasedUrl + "/api/rule";
+  private String baseUrl;
+
+
+  @PostConstruct
+  public void init() {
+    baseUrl = rulebasedUrl + "/api/rule";
+  }
 
   @Override
   public Rule findById(String id) {

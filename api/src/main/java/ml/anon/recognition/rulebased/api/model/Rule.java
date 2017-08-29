@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
@@ -28,7 +29,7 @@ public class Rule implements Applicable {
 
   @Id
   private String id;
-
+  @NotNull
   private String regExp;
 
   private boolean core;
@@ -36,11 +37,16 @@ public class Rule implements Applicable {
   private boolean editable = false;
   private double weight;
   private String name;
+  @NotNull
   private Label label;
 
   @Singular
   private List<Constraint> constrains;
 
+  public Rule copy() {
+    return Rule.builder().active(active).regExp(regExp).core(false).active(active).weight(weight)
+        .editable(true).weight(weight).name(name + " (copy)").label(label).build();
+  }
 
   @Override
   public List<Anonymization> apply(Document doc, ReplacementResource repl) throws Exception {
