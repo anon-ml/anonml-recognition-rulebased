@@ -24,6 +24,8 @@ import java.util.*;
 public class AnnotationService {
 
   @Resource
+  private ReplacementResource replacementResource;
+  @Resource
   private RuleRepository repo;
 
   private Multimap<Label, Rule> rules = ArrayListMultimap.create();
@@ -55,8 +57,11 @@ public class AnnotationService {
         if (ruleResults.isEmpty()) {
           for (Rule r : weights.get(key)) {
             if (r.isActive()) {
-              List<Anonymization> apply = r.apply(doc, new ReplacementResource());
-              log.info("Applicable " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
+
+              List<Anonymization> apply = r.apply(doc, replacementResource);
+              log.info(
+                  "Applicable " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
+
               ruleResults.addAll(apply);
             }
           }
