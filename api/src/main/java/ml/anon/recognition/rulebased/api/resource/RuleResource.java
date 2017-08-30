@@ -42,9 +42,6 @@ public class RuleResource implements Create<Rule>, Read<Rule>, Update<Rule>,
   }
 
 
-  private String baseUrl = "http://localhost:9002" + "/api/rule";
-
-
   @Override
   public Rule findById(String id) {
     log.debug("Find Applicable with id {}", id);
