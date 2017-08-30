@@ -37,6 +37,7 @@ public class Rule implements Applicable {
   private boolean editable = false;
   private double weight;
   private String name;
+
   @NotNull
   private Label label;
 
@@ -47,6 +48,7 @@ public class Rule implements Applicable {
     return Rule.builder().active(active).regExp(regExp).core(false).active(active).weight(weight)
         .editable(true).weight(weight).name(name + " (copy)").label(label).build();
   }
+
 
   @Override
   public List<Anonymization> apply(Document doc, ReplacementResource repl) throws Exception {

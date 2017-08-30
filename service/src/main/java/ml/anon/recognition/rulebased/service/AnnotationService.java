@@ -57,9 +57,11 @@ public class AnnotationService {
         if (ruleResults.isEmpty()) {
           for (Rule r : weights.get(key)) {
             if (r.isActive()) {
+
               List<Anonymization> apply = r.apply(doc, replacementResource);
               log.info(
                   "Applicable " + r.getName() + " (" + r.getLabel() + "): " + apply.toString());
+
               ruleResults.addAll(apply);
             }
           }

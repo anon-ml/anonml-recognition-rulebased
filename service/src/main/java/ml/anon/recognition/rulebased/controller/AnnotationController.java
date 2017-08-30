@@ -21,6 +21,7 @@ public class AnnotationController {
 
   @Resource
   private AnnotationService annotationService;
+
   @Resource
   private DocumentResource documentResource;
 
