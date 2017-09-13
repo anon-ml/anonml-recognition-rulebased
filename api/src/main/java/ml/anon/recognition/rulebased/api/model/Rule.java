@@ -10,11 +10,8 @@ import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
-import ml.anon.anonymization.model.Anonymization;
-import ml.anon.anonymization.model.Label;
-import ml.anon.anonymization.model.Producer;
+import ml.anon.anonymization.model.*;
 import ml.anon.documentmanagement.model.Document;
-import ml.anon.anonymization.model.Replacement;
 import ml.anon.documentmanagement.resource.ReplacementResource;
 import ml.anon.model.BaseEntity;
 import ml.anon.recognition.rulebased.api.constraints.Constraint;
@@ -59,7 +56,7 @@ public class Rule extends BaseEntity implements Applicable {
             regExpResults.add(Anonymization.builder()
                     .data(
                             repl.create(Replacement.builder().label(label).original(matcher.group(0)).build()))
-                    .producer(Producer.RULE).build());
+                    .producer(Producer.RULE).status(Status.PROCESSING).build());
         }
         return applyConstrains(regExpResults);
     }
