@@ -49,7 +49,7 @@ public class RuleResource implements Create<Rule>, Read<Rule>, ReadAll<Rule>, Up
     }
 
     @Override
-    public List<Rule> findAll() {
+    public List<Rule> findAll(int page) {
         log.debug("Find all rules");
         ResponseEntity<List<Rule>> result = restTemplate
                 .exchange(baseUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<Rule>>() {
